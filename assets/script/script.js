@@ -12,10 +12,20 @@ let startEl = document.getElementById("start");
 
 // quiz page variables
 let quizEl = document.getElementById("quiz");
+
 let scoresEl = document.getElementById("scores"); 
 let timerEl = document.getElementById("timer"); 
+
 let questionEl = document.getElementById("questions");
-let choicesEl = document.getElementsByClassName("choices");
+// let optionsEl = document.getElementById("options");
+
+
+
+
+
+// console.log(optionBtns);
+
+// optionsEl.remove();
 
 // ALGORITHM:
 
@@ -23,14 +33,15 @@ let choicesEl = document.getElementsByClassName("choices");
 
 startEl.addEventListener("click", function(){
   
-  homeEl.style.display = "none";
+  homeEl.remove();
   quizEl.style.display = "block";
   scoresEl.textContent = "View High Scores"
+
   setTime();
-
+  showQuestions();
+  
 });
-
-
+ 
 // 2) a timer begins counting down. 
 
 let secondsLeft = 75;
@@ -61,7 +72,7 @@ let questionArray = [
 
   {
     question: "How do you start writing a FOR loop?",
-    options: ["A) for (let i = 0; i > array.length; i++)","B) for (i = 15)","C) for (let i = 0, i > array.length, i++) ","D) for i (let i = 5)"],
+    options: ["A) for (let i = 0; i > array.length; i++)","B) for (i = 1)","C) for (let i = 0, i > array.length, i++) ","D) for i (let i = 5)"],
     correctAnswer: 0 
   },
 
@@ -85,16 +96,42 @@ let questionArray = [
 
 ];
 
-console.log(questionArray[0].options[1]);
+let questionI = 0;
 
-function showQuestions(){
+function showQuestions(){ // inspired by group work w/peers
 
+  if (questionI >= questionArray.length){
 
-}
+    quizEl.remove();
+
+  } else {
+    
+    for (let i = 0; i < 4; i++){
+
+      let optionsEl = document.getElementById(`${i}`);
+
+      questionEl.textContent = questionArray[questionI].question;
+      optionsEl.textContent = questionArray[questionI].options[i];
+
+      optionsEl.onclick = function() {
+        let correctAnswer = questionArray[questionI].correctAnswer;
+        if ( i === correctAnswer ){
+          console.log ("correct");
+        }
+        else {
+          console.log ("incorrect");
+          secondsLeft -= 10;
+        }
+        questionI++;
+        showQuestions();
+      }  
+    }
+  }
+
 
 // 4) if correct, render "correct!" in document and present user with the next question.
 
-for (let i = 0; i < questionArray.length; i++){
+
 // console.log(questionArray[i].question);
 
 }
