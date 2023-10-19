@@ -84,7 +84,7 @@ clearEl.addEventListener("click", function(){
 
 // saves user score
 function setScore(){
-  let initials = inputEl.value;
+  let initials = inputEl.value.toUpperCase();
 
   // console.log(initials);
 
