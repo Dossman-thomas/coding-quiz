@@ -13,80 +13,86 @@
 <body>
 
 <!-- quiz container -->
-  <div>
-
-    <div>
-      <button id="scores">View High Scores</button>
-      <p id="timer"></p>
-    </div>
-
-    <!-- Title/start button -->
-    <section id="home">
-
-      <div>
-        <h1>Coding Quiz</h1>
-
-        <p>Try to answer the following code-related questions within the time limit.  Keep in mind that incorrect answers will result in a ten second penalty to your timer!</p>
+  <div id="root-c">
+    <main>
+      <header>
+        <button id="scores">View High Scores</button>
+        <p id="timer"></p>
+      </header>
+  
+      <!-- Title/start button -->
+      <section id="home">
+  
+          <div>
+            <h1>Coding Quiz</h1>
+    
+            <p id="instructions">Try to answer the following code-related questions within the time limit.  Keep in mind that incorrect answers will result in a ten second penalty to your timer!</p>
+          </div>
+          <button id="start">
+            Begin Quiz</button>
+    
+        </section>
+    
+        <!-- Quiz Section -->
+        <section id="quiz">
+            <h2 id="questions"></h2>
+            <ul id="options">
+              <button class="options-btns" id="0"></button>
+              <button class="options-btns" id="1"></button>
+              <button class="options-btns" id="2"></button>
+              <button class="options-btns" id="3"></button>
+            </ul>
+    
+            <p id="answer-check"></p>
+          
+    
+          <div>
+    
+          </div>
+        </section>
+    
+        <!-- End Quiz Section -->
+    
+        <section id="finish">
+          
+          <h2>Done!</h2>
+    
+          <p id="finalscore"></p>
+          
+          <div id="input-container">
+            <input placeholder="Enter initials" id="input">
+          
+            <button id="submit">Submit</button>
+          </div>
+          
+    
+        </section>
+    
+        <!-- High Scores Section -->
+    
+        <section id="score">
+    
+          <h2>Scoreboard</h2>
+    
+          <ul id="leaderboard">
+          </ul>
+          <div id="end-btns">
+            <button id="retry">
+              Retry
+            </button>
+      
+            <button id="clear">
+              Clear
+            </button>
+          </div>
+        
+    
+        </section>
+  
       </div>
-      <button id="start">Begin Quiz</button>
-
-    </section>
-
-    <!-- Quiz Section -->
-    <section id="quiz">
-        <h2 id="questions"></h2>
-        <ul id="options">
-          <button class="option-btns" id="0"></button>
-          <button class="options-btns" id="1"></button>
-          <button class="options-btns" id="2"></button>
-          <button class="options-btns" id="3"></button>
-        </ul>
-
-        <p id="answer-check"></p>
-      
-
-      <div>
-
-      </div>
-    </section>
-
-    <!-- End Quiz Section -->
-
-    <section id="finish">
-      
-      <h2>Done!</h2>
-
-      <p id="finalscore"></p>
-
-      <input placeholder="Enter initials" id="input">
-      
-      <button id="submit">Submit</button>
-
-    </section>
-
-    <!-- High Scores Section -->
-
-    <section id="score">
-
-      <h2>Scoreboard</h2>
-
-      <ul id="leaderboard">
-      </ul>
-
-      <button id="retry">
-        Retry
-      </button>
-
-      <button id="clear">
-        Clear scoreboard
-      </button>
-
-    </section>
-
-
-
-  </div>
-
+  
+    </main>
+    
   
   <script src="./assets/script/script.js"></script>  
 </body>

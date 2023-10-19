@@ -1,6 +1,152 @@
+:root {
+  --bkgrnd: #2f547c;
+  --text: white;
+  --btns: #e55661;
+}
+
+*{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
 
 #quiz,
 #finish,
 #score {
   display: none;
+}
+
+ #root-c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 25px;
+} 
+
+#home,
+#quiz,
+#finish,
+#score {
+  text-align: center;
+}
+
+#table {
+  text-align: center;
+}
+
+main {
+  width: 100%;
+  font-size: 1.3rem;
+}
+
+
+body {
+  padding:0;
+  background-color: var(--bkgrnd);
+  color: var(--text);
+  margin: 0 auto;
+} 
+
+header {
+  height: 6vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 9px;
+} 
+
+h1,
+h2 {
+  margin: 3vh auto;
+}
+
+h2 {
+  margin-top: 50px;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding:0;
+}
+
+input {
+  border: none;
+  border-radius: 50px;
+  padding: 20px;
+  margin-bottom: 3vh;
+  width: 50vw;
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+button {
+  background-color: var(--btns);
+  color: var(--text);
+  font-size: 1rem;
+  padding: 10px 20px;
+  width: 20vw;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color:#ed828b;
+  transition: 50ms;
+}
+
+.options-btns {
+  margin-top: 20px;
+  padding: 10px 20px;
+  width: 40vw;
+  overflow: hidden;
+}
+
+#instructions {
+  margin-bottom: 5vh;
+}
+
+#input-container,
+#end-btns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#scores {
+  background-color: var(--bkgrnd);
+  font-size: 1.3rem;
+  text-wrap: nowrap;
+}
+
+#finalscore {
+  margin-bottom: 3vh;
+}
+
+#leaderboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#answer-check {
+  margin-top: 30px;
+  padding: 20px;
+}
+
+#retry {
+  margin: 3vh 0;
+}
+
+b {
+  border-collapse: separate;
+  padding: 10px 10vw;
+  border-bottom: 2px solid white;
+}
+
+td, 
+th {
+  padding: 20px 40px;
 }

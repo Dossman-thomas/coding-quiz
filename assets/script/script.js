@@ -53,6 +53,8 @@ scoresEl.addEventListener("click", function(){
  homeEl.remove();
  quizEl.remove();
  endEl.remove();
+ timerEl.remove();
+ scoresEl.remove();
  scoreSectionEl.style.display = "block"; 
 
  getScores();
@@ -61,6 +63,7 @@ scoresEl.addEventListener("click", function(){
 // submits user initials and score
 submitEl.addEventListener("click", function(){
 
+  scoresEl.remove();
   endEl.remove();
   scoreSectionEl.style.display = "block";
 
@@ -82,6 +85,14 @@ clearEl.addEventListener("click", function(){
 // saves user score
 function setScore(){
   let initials = inputEl.value;
+
+  // console.log(initials);
+
+  // if user fails to enter initials, value is saved as "anonymous"
+  if(initials === ''){
+    initials = "Anonymous";
+  }
+
   let scoreHistory = [];
   let newScore = {
     name: initials,
@@ -117,6 +128,7 @@ scoreHistory.sort(function(a, b) {
 
 // Create an HTML table to display the leaderboard
 var table = document.createElement('table');
+table.id = 'table';
 var tableHeader = table.createTHead();
 var headerRow = tableHeader.insertRow(0);
 headerRow.insertCell(0).innerHTML = '<b>Name</b>';
@@ -143,11 +155,12 @@ function setTime(){
     secondsLeft--;
     timerEl.textContent = "Time: " + secondsLeft;
 
-    if(secondsLeft === 0){
+    if(secondsLeft <= 0){
       //stops execution of action at set interval
       clearInterval(timeInterval);
       quizEl.remove();
       endEl.style.display = "block";
+      timerEl.remove();
       score = 0;
     }
 
@@ -203,10 +216,17 @@ function showQuestions(){ // inspired by group work w/peers
     clearInterval(timeInterval);
     timerEl.remove();
     score = secondsLeft;
+
+    // if an incorrect answer as time runs out results in a negative time, score is set to 0
+    if(score < 0){
+      score = 0;
+    }
+  
     finalScoreEl.textContent = `Your final score is ${score}.`
 
   } else {
   
+
   // quiz rendering one question at a time
     for (let i = 0; i < questionArray[questionI].options.length; i++){
       
@@ -220,12 +240,14 @@ function showQuestions(){ // inspired by group work w/peers
 
         // if correct, render "correct!" in document and present user with the next question.
         if (i === correctAnswer){
-          acCheckEl.textContent = "Correct!"
+          acCheckEl.textContent = "Correct!";
+          acCheckEl.style.borderTop = "2px solid white";
         }
 
         // if incorrect, render "incorrect." in document and time subracted from countdown clock. present user with next question.
         else {
-          acCheckEl.innerText = "Incorrect."
+          acCheckEl.innerText = "Incorrect.";
+          acCheckEl.style.borderTop = "2px solid white";
           secondsLeft -= 10;
         }
         questionI++;
