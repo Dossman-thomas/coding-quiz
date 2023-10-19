@@ -4,10 +4,8 @@
   --btns: #e55661;
 }
 
-*{
+* {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  margin: 0;
-  padding: 0;
 }
 
 #quiz,
@@ -26,25 +24,15 @@
 #home,
 #quiz,
 #finish,
-#score {
-  text-align: center;
-}
-
+#score,
 #table {
   text-align: center;
 }
 
-main {
-  width: 100%;
-  font-size: 1.3rem;
-}
-
 
 body {
-  padding:0;
   background-color: var(--bkgrnd);
   color: var(--text);
-  margin: 0 auto;
 } 
 
 header {
@@ -87,9 +75,7 @@ button {
   font-size: 1rem;
   padding: 10px 20px;
   width: 20vw;
-  border: none;
   border-radius: 50px;
-  cursor: pointer;
 }
 
 button:hover {

@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  width: 100%;
+  font-size: 1.3rem;
+}
+
+body {
+  padding: 0;
+  margin: 0 auto;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
