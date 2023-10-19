@@ -5,7 +5,8 @@ I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
 SO THAT I can gauge my progress compared to my peers */
 
 // GLOBAL VARIABLES
-
+let timeInterval;
+let score; 
 // home page variables
 let homeEl = document.getElementById("home"); 
 let startEl = document.getElementById("start"); 
@@ -15,17 +16,21 @@ let quizEl = document.getElementById("quiz");
 
 let scoresEl = document.getElementById("scores"); 
 let timerEl = document.getElementById("timer"); 
-
 let questionEl = document.getElementById("questions");
-// let optionsEl = document.getElementById("options");
+let acCheckEl = document.getElementById("answer-check");
 
+// end page variables 
+let endEl = document.getElementById("finish");
+let submitEl = document.getElementById("submit");
+let inputEl = document.getElementById("input");
+let finalScoreEl = document.getElementById("finalscore");
 
+// scoreboard page variables 
 
-
-
-// console.log(optionBtns);
-
-// optionsEl.remove();
+let scoreSectionEl = document.getElementById("score");
+let leaderboardEl = document.getElementById("leaderboard");
+let retryEl = document.getElementById("retry");
+let clearEl = document.getElementById("clear");
 
 // ALGORITHM:
 
@@ -41,19 +46,91 @@ startEl.addEventListener("click", function(){
   showQuestions();
   
 });
+
+submitEl.addEventListener("click", function(){
+
+  endEl.remove();
+  scoreSectionEl.style.display = "block";
+
+  setScore();
+  getScores();
+})
+
+retryEl.addEventListener("click", function(){
+  location.reload();
+})
+
+clearEl.addEventListener("click", function(){
+  localStorage.setItem("scoreHistory", "[]");
+  location.reload();
+})
+
+function setScore(){
+  let initials = inputEl.value;
+  let scoreHistory = [];
+  let newScore = {
+    name: initials,
+    score: score
+  }
+
+  let lastStorage = localStorage.getItem("scoreHistory");
+
+  // if savedStorage exists, getItem from local storage and pass it into scoreHistory array.
+  if (lastStorage !== null){
+    scoreHistory = JSON.parse(lastStorage);
+  }
+
+  scoreHistory.push(newScore);
+
+  localStorage.setItem("scoreHistory", JSON.stringify(scoreHistory));
+
+  console.log(scoreHistory);
+
+}
+
+function getScores(){
+
+let scoreHistory = JSON.parse(localStorage.getItem("scoreHistory"));
+
+// via chatGPT
+
+// Sort the leaderboard array by score in descending order
+scoreHistory.sort(function(a, b) {
+  return b.score - a.score;
+});
+
+// Create an HTML table to display the leaderboard
+var table = document.createElement('table');
+var tableHeader = table.createTHead();
+var headerRow = tableHeader.insertRow(0);
+headerRow.insertCell(0).innerHTML = '<b>Name</b>';
+headerRow.insertCell(1).innerHTML = '<b>Score</b>';
+
+for (var i = 0; i < scoreHistory.length; i++) {
+  var row = table.insertRow(i + 1);
+  row.insertCell(0).innerHTML = scoreHistory[i].name;
+  row.insertCell(1).innerHTML = scoreHistory[i].score;
+}
+
+leaderboardEl.appendChild(table);
+
+}
  
 // 2) a timer begins counting down. 
 
 let secondsLeft = 75;
 
 function setTime(){
-  let timeInterval = setInterval(function(){
+  timeInterval = setInterval(function(){
     secondsLeft--;
     timerEl.textContent = "Time: " + secondsLeft;
 
     if(secondsLeft === 0){
       //stops execution of action at set interval
       clearInterval(timeInterval);
+      quizEl.remove();
+      endEl.style.display = "block";
+      score = 0;
     }
 
   }, 1000);
@@ -100,14 +177,20 @@ let questionI = 0;
 
 function showQuestions(){ // inspired by group work w/peers
 
+  // if all questions answered or time runs out, game ends and end page is displayed.
   if (questionI >= questionArray.length){
 
     quizEl.remove();
+    endEl.style.display = "block";
+    clearInterval(timeInterval);
+    timerEl.remove();
+    score = secondsLeft;
+    finalScoreEl.textContent = `Your final score is ${score}.`
 
   } else {
     
-    for (let i = 0; i < 4; i++){
-
+    for (let i = 0; i < questionArray[questionI].options.length; i++){
+      
       let optionsEl = document.getElementById(`${i}`);
 
       questionEl.textContent = questionArray[questionI].question;
@@ -115,11 +198,15 @@ function showQuestions(){ // inspired by group work w/peers
 
       optionsEl.onclick = function() {
         let correctAnswer = questionArray[questionI].correctAnswer;
+
+        // if correct, render "correct!" in document and present user with the next question.
         if ( i === correctAnswer ){
-          console.log ("correct");
+          acCheckEl.textContent = "Correct!"
         }
+
+        // if incorrect, render "incorrect!" in document and time subracted from countdown clock. present user with next question.
         else {
-          console.log ("incorrect");
+          acCheckEl.innerText = "Incorrect."
           secondsLeft -= 10;
         }
         questionI++;
@@ -127,29 +214,12 @@ function showQuestions(){ // inspired by group work w/peers
       }  
     }
   }
-
-
-// 4) if correct, render "correct!" in document and present user with the next question.
-
-
-// console.log(questionArray[i].question);
-
 }
 
-// 5) if incorrect, render "incorrect!" in document and time subracted from countdown clock. present user with next question.
+
+// save user initials and score using local storage.
 
 
 
-// 6) if all questions answered or time runs out, game ends.
 
-
-
-// 7) present user w/input allowing them to save their initials.
-
-
-
-// 8) save user initials and score using local storage.
-
-
-
-// 9) display/render user initials and scores from previously saved quiz attempts.
+// display/render user initials and scores from previously saved quiz attempts.

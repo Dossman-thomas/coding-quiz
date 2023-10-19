@@ -15,11 +15,17 @@
 <!-- quiz container -->
   <div>
 
+    <div>
+      <p id="scores"></p>
+      <p id="timer"></p>
+    </div>
+
     <!-- Title/start button -->
     <section id="home">
 
       <div>
         <h1>Coding Quiz</h1>
+
         <p>Try to answer the following code-related questions within the time limit.  Keep in mind that incorrect answers will result in a ten second penalty to your timer!</p>
       </div>
       <button id="start">Begin Quiz</button>
@@ -29,10 +35,7 @@
     <!-- Quiz Section -->
     <section id="quiz">
 
-      <div>
-        <p id="scores"></p>
-        <p id="timer"></p>
-      </div>
+      
 
         <h2 id="questions"></h2>
         <ul id="options">
@@ -41,6 +44,8 @@
           <button class="options-btns" id="2"></button>
           <button class="options-btns" id="3"></button>
         </ul>
+
+        <p id="answer-check"></p>
       
 
       <div>
@@ -49,11 +54,38 @@
     </section>
 
     <!-- End Quiz Section -->
-    <section>
+    <section id="finish">
+
+      <h2>Done!</h2>
+
+      <p id="finalscore"></p>
+
+      <input placeholder="Enter initials" id="input">
+      
+      <button id="submit">Submit</button>
 
     </section>
 
     <!-- High Scores Section -->
+
+    <section id="score">
+
+      <h2>Scoreboard</h2>
+
+      <ul id="leaderboard">
+      </ul>
+
+      <button id="retry">
+        Retry
+      </button>
+
+      <button id="clear">
+        Clear scoreboard
+      </button>
+
+    </section>
+
+
 
   </div>
 

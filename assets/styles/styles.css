@@ -1,4 +1,6 @@
 
-#quiz {
+#quiz,
+#finish,
+#score {
   display: none;
 }
